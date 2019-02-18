@@ -47,9 +47,10 @@ object Test {
     val IDF: DataFrame = documentFrequency.withColumn("idf", calcIdfUdf(col("df")))
 
 
-    tremFrequency
-      .join(IDF, Seq("token"), "left")
-      .withColumn("tf_idf", col("tf") * col("idf")).show()
+    val TF_IDF = tremFrequency.join(IDF, Seq("token"), "left")
+                               .withColumn("tf_idf", col("tf") * col("idf"))
+
+    TF_IDF.show()
 
 
 
