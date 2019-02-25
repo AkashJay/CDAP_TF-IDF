@@ -16,10 +16,14 @@ object Test {
     val sc = spark.sparkContext
     import spark.implicits._
 
+
+
+
     val linesRDD: RDD[String] = sc.textFile("in/Test")
+    for (word <- linesRDD.collect()) println(word)
     val splitText: RDD[List[String]] = linesRDD.map(x => x.split("\\s+").map(_.trim).toList)
     val documents: DataFrame = splitText.toDF
-    val docCount: Long = documents.count()
+    val docCount: Double = documents.count()
 
     val dfWithDocId = documents.withColumn("doc_id", monotonically_increasing_id()).withColumnRenamed("value", "document")
 
@@ -28,23 +32,21 @@ object Test {
 
 
     val unfoldedDocs: DataFrame = dfWithDocId.select(columns: _*)
-    unfoldedDocs.show()
+    //unfoldedDocs.show()
 
 
     val tremFrequency = unfoldedDocs.groupBy("doc_id", "token")
       .agg(count("document") as "tf")
-    tremFrequency.printSchema()
+    //tremFrequency.printSchema()
 
     val documentFrequency = tremFrequency.groupBy("token")
         .agg(countDistinct("doc_id") as "df")
 
-    documentFrequency.printSchema()
+    //documentFrequency.printSchema()
 
 
 
-    val calcIdfUdf = udf { df: Long =>
-                math.log(docCount/df.toDouble +1)
-    }
+    val calcIdfUdf = udf { df: Long => math.log((docCount.toDouble + 1) / (df.toDouble + 1)) }
 
     val IDF: DataFrame = documentFrequency.withColumn("idf", calcIdfUdf(col("df")))
    // IDF.printSchema()
@@ -54,12 +56,14 @@ object Test {
                                .withColumn("tf_idf", col("tf") * col("idf"))
 
     //TF_IDF.printSchema()
-    //TF_IDF.show()
+    TF_IDF.show()
 
 
 
 
   }
+
+
 
 
 
