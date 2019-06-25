@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="TF-IDF:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="CDAP" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../../build/classes/main" />
+    <output url="file://$MODULE_DIR$/../../out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
@@ -13,6 +13,10 @@
     <orderEntry type="library" name="Gradle: org.apache.spark:spark-core_2.11:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.spark:spark-sql_2.11:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.scala-lang:scala-library:2.11.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-analyzers-common:4.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-core:4.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-queryparser:4.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.spark:spark-mllib_2.11:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.avro:avro:1.7.7" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.avro:avro-mapred:hadoop2:1.7.7" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter:chill_2.11:0.8.0" level="project" />
@@ -65,6 +69,13 @@
     <orderEntry type="library" name="Gradle: org.apache.spark:spark-catalyst_2.11:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.parquet:parquet-column:1.8.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.parquet:parquet-hadoop:1.8.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-queries:4.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-sandbox:4.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.spark:spark-streaming_2.11:2.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.spark:spark-graphx_2.11:2.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.spark:spark-mllib-local_2.11:2.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.scalanlp:breeze_2.11:0.13.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jpmml:pmml-model:1.2.15" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-compress:1.4.1" level="project" />
@@ -109,6 +120,15 @@
     <orderEntry type="library" name="Gradle: org.apache.parquet:parquet-encoding:1.8.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.parquet:parquet-format:2.3.1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.parquet:parquet-jackson:1.8.2" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta-regexp:jakarta-regexp:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.fommil.netlib:core:1.1.2" level="project" />
+    <orderEntry type="library" name="Gradle: net.sourceforge.f2j:arpack_combined_all:0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scalanlp:breeze-macros_2.11:0.13.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.sf.opencsv:opencsv:2.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.rwl:jtransforms:2.4.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.spire-math:spire_2.11:0.13.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.chuusai:shapeless_2.11:2.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jpmml:pmml-schema:1.2.15" level="project" />
     <orderEntry type="library" name="Gradle: org.tukaani:xz:1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.esotericsoftware:minlog:1.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.objenesis:objenesis:2.1" level="project" />
@@ -136,6 +156,9 @@
     <orderEntry type="library" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b34" level="project" />
     <orderEntry type="library" name="Gradle: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Gradle: jline:jline:0.9.94" level="project" />
+    <orderEntry type="library" name="Gradle: org.spire-math:spire-macros_2.11:0.13.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.typelevel:machinist_2.11:0.6.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.typelevel:macro-compat_2.11:1.1.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-digester:commons-digester:1.8" level="project" />
     <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils-core:1.8.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15" level="project" />

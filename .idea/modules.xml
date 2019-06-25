@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TF-IDF.iml" filepath="$PROJECT_DIR$/.idea/modules/TF-IDF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TF-IDF.iml" filepath="$PROJECT_DIR$/TF-IDF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TF-IDF_main.iml" filepath="$PROJECT_DIR$/.idea/modules/TF-IDF_main.iml" group="TF-IDF" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TF-IDF_test.iml" filepath="$PROJECT_DIR$/.idea/modules/TF-IDF_test.iml" group="TF-IDF" />
     </modules>
   </component>
 </project>

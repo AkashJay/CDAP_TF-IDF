@@ -15,7 +15,7 @@ object TfIdfCalculator {
     import spark.implicits._
 
     //Read data from text files to Line RDD
-    val linesRDD: RDD[String] = sc.textFile("/home/akash/Documents/SLIIT/CDAP/TF-IDF/in/Test")
+    val linesRDD: RDD[String] = sc.textFile(sourceFilePath)
 
     // Split each text by space and create a list of words
     val splitText: RDD[List[String]] = splitTextBySpace(linesRDD)
@@ -26,11 +26,11 @@ object TfIdfCalculator {
     val docCount: Double = documents.count()
 
     //Add a unique ID to each document and change the name of value column to document
-    val dfWithDocId = documents.withColumn("doc_id", monotonically_increasing_id()).withColumnRenamed("value", "document")
-    //dfWithDocId.show()
+    val dfWithDocId = documents.withColumn(docID, monotonically_increasing_id()).withColumnRenamed(valueDoc, document)
+    dfWithDocId.show()
 
     val columns: Array[Column] = dfWithDocId.columns.map(col) :+
-      (explode(col("document")) as "token")
+      (explode(col(document)) as token)
     //for (word <- columns) println(word)
 
 
@@ -40,26 +40,31 @@ object TfIdfCalculator {
 
     //calculate the term frequency by grouping data usin doi id and token
 
-    val tremFrequency: DataFrame = unfoldedDocs.groupBy("doc_id", "token")
-                                                  .agg(count("document") as "tf")
+    val tremFrequency: DataFrame = unfoldedDocs.groupBy(docID, token)
+                                                  .agg(count(document) as termFrequency)
     //tremFrequency.show()
 
     //Calculate dofcument frequency
-    val documentFrequency = tremFrequency.groupBy("token")
-                                  .agg(countDistinct("doc_id") as "df")
+    val documentFreq = tremFrequency.groupBy(token)
+                                  .agg(countDistinct(docID) as documentFrequency)
     //documentFrequency.show()
 
     val calcIdfUdf = udf { df: Long => math.log((docCount.toDouble + 1) / (df.toDouble + 1)) }
     //calculate IDF for each distinct token
-    val IDF: DataFrame = documentFrequency.withColumn("idf", calcIdfUdf(col("df")))
+    val IDF: DataFrame = documentFreq.withColumn(idf, calcIdfUdf(col(documentFrequency)))
     //IDF.show()
 
     //Join two dataframes. tf and Idf
-    val TF_IDF = tremFrequency.join(IDF, Seq("token"), "left")
-      .withColumn("tf_idf", col("tf") * col("idf"))
+    val TF_IDF = tremFrequency.join(IDF, Seq(token), "left").withColumn(tfIdf, col(termFrequency) * col(idf))
     //TF_IDF.orderBy(col("tf_idf").asc).show(20)
 
-    TF_IDF.groupBy(col("token")).agg(sum(col("tf_idf"))/ count(col("token"))).orderBy(col("(sum(tf_idf) / count(token))").asc).show(20)
+
+    //Get average TF_IDF value for a unique token in the cropus
+    val stopList = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(200)
+                                .select(token).collect().map(_(0)).toList
+
+//    val stopList: List[Any] = TF_IDF.select("token").collect().map(_(0)).toList
+    stopList.foreach(println)
 
 
 
@@ -69,5 +74,15 @@ object TfIdfCalculator {
   def splitTextBySpace (linesRDD: RDD[String]): RDD[List[String]] = {
     linesRDD.map(x => x.split("\\s+").map(_.trim).toList)
   }
+
+  val sourceFilePath = "/home/akash/Documents/SLIIT/CDAP/Cropus/LocalAll/HiruNewsLocalAll"        //"in/Test"
+  val docID = "doc_id"
+  val valueDoc = "value"
+  val document = "document"
+  val token = "token"
+  val termFrequency = "termFrequency"
+  val documentFrequency = "documentFrequency"
+  val idf ="idf"
+  val tfIdf = "tf_idf"
 
 }
