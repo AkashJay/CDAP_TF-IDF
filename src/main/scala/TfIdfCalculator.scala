@@ -27,7 +27,7 @@ object TfIdfCalculator {
 
     //Add a unique ID to each document and change the name of value column to document
     val dfWithDocId = documents.withColumn(docID, monotonically_increasing_id()).withColumnRenamed(valueDoc, document)
-    dfWithDocId.show()
+    //dfWithDocId.show()
 
     val columns: Array[Column] = dfWithDocId.columns.map(col) :+
       (explode(col(document)) as token)
@@ -52,20 +52,24 @@ object TfIdfCalculator {
     val calcIdfUdf = udf { df: Long => math.log((docCount.toDouble + 1) / (df.toDouble + 1)) }
     //calculate IDF for each distinct token
     val IDF: DataFrame = documentFreq.withColumn(idf, calcIdfUdf(col(documentFrequency)))
-    //IDF.show()
+//    IDF.orderBy(col("idf").asc).show(20)
 
     //Join two dataframes. tf and Idf
     val TF_IDF = tremFrequency.join(IDF, Seq(token), "left").withColumn(tfIdf, col(termFrequency) * col(idf))
-    //TF_IDF.orderBy(col("tf_idf").asc).show(20)
+//    TF_IDF.orderBy(col("termFrequency").desc).show(20)
 
 
     //Get average TF_IDF value for a unique token in the cropus
-    val stopList = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(200)
+    val stopList = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(100)
                                 .select(token).collect().map(_(0)).toList
 
-//    val stopList: List[Any] = TF_IDF.select("token").collect().map(_(0)).toList
-    stopList.foreach(println)
+    val stopListS = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(400)
+      .select(token)
+    stopListS.write.text("/root/Akash/CDAP/StopList" )
 
+//    val stopList: List[Any] = TF_IDF.select("token").collect().map(_(0)).toList
+//    stopList.foreach(println)
+//
 
 
 
@@ -75,7 +79,7 @@ object TfIdfCalculator {
     linesRDD.map(x => x.split("\\s+").map(_.trim).toList)
   }
 
-  val sourceFilePath = "/home/akash/Documents/SLIIT/CDAP/Cropus/LocalAll/HiruNewsLocalAll"        //"in/Test"
+  val sourceFilePath = "/home/akash/Documents/SLIIT/CDAP/Cropus/SplittedDocuments_June/Rugby"        //"in/Test"
   val docID = "doc_id"
   val valueDoc = "value"
   val document = "document"

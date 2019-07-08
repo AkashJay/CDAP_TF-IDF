@@ -2,7 +2,7 @@ package TestClasses; /**
  * Created by akash on 2/5/19.
  */
 
-import CommonUtills.TokenizeWithAnalyzer;
+import StopWordRemoval.TokenizeWithAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 import org.apache.lucene.util.Version;
