@@ -1,5 +1,5 @@
 # CDAP_TF-IDF
-<h2> Machine Laearning Preprocessing Analyzer for sinhala language </h2>
+<h2> Machine Learning Preprocessing Analyzer for sinhala language </h2>
 
 
 <p>Apache Lucene is a free open-source information software library which is originally completely written
