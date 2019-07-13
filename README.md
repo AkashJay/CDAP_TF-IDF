@@ -12,23 +12,20 @@ https://lucene.apache.org/core/7_5_0/analyzerscommon/index.html).
 Most frequently used analyzer is English Analyzer. Some languages like Sinhala still don&#39;t have their own
 analyzers, so they use English analyzer to analyze the document contents. Since these are two different
 languages it is not much accurately analyzed. Sinhala language which is our mother tongue is also facing
-the same issues. Most of available analyzing techniques are language dependent.
-Here are the main techniques used in analyzers ; <br>
-
+the same issues. Most of available analyzing techniques are language dependent<br>
+<p>As a Sri lankan research team our main goal is to build a analyzer for Sinhala language.</b> <br>
+Tokenization, Stopword Removing, Stemming Algorithms, Lemmatization Algorithms are four main
+techniques in every analyzer which are currently available.<br>
 <ul>
-  <li>Up to 40+ languages have identified their language specific stopwords (extremely Common
-words which would appear to be little value in helping select  documents matching user needs).
-(https://www.ranks.nl/stopwords) But still there is no stopword list for Sinhala language.</li>
-  <li>Stemming algorithms (stemming is the process of reducing inflected or sometimes derived words
-to their word stem, root  form/ generally a written word form) are language dependent, So we
-can’t use any other languages’ stemming algorithms to Sinhala language.</li>
-  <li>Lemmatization algorithms( Lemmatization (or lemmatization) in linguistics  is the process of
-grouping together the inflected forms of a word so they can be analysed as a single item,
-identified by the word&#39;s lemma, or dictionary form) also language dependent. To apply
-Lemmatization algorithms there should be proper understand about language.</li>
-  <li>Tokenizing contents is different from one language to other. We can’t use one languages’
-tokenization method to tokenize other language content.Also we should have proper language
-model and assign a probability to suitable span of text(word/sentence/corpus/..).</li>
-</ul>  
+  <li>Tokenization Algorithm:<br>
+We are going to implement a proper algorithm which will accurately tokenize the Sinhala language Documents.</li>
+  <li>Stopword Removal Algorithm:<br>
+In our solution we are going to implement a algorithm to remove common stopword as well as a algorithm to remove domain specific stopwords.</li>
+  <li>Stemming Algorithm:<br>
+For Sinhala we are going to build language dependent stemming algorithm to  perform the process of reducing inflected or sometimes derived words to their word stem, root form.</li>
+  <li>Lemmatization Algorithm:<br>
+In Lemmatization we are going to implement an algorithm for the process of grouping together the inflected forms of a word so they can be analyzed as a single item.</li>
+
+</ul> 
 
 </p>
