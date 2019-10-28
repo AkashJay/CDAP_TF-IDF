@@ -60,12 +60,12 @@ object TfIdfCalculator {
 
 
     //Get average TF_IDF value for a unique token in the cropus
-    val stopList = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(100)
+    val stopList = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(400)
                                 .select(token).collect().map(_(0)).toList
 
-    val stopListS = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(400)
+    val stopListS = TF_IDF.groupBy(col(token)).agg(sum(col(tfIdf))/ count(col(token))).orderBy(col("(sum(tf_idf) / count(token))").asc).limit(1000)
       .select(token)
-    stopListS.write.text("/root/Akash/CDAP/StopList" )
+    stopListS.write.text("in/newStopList2" )
 
 //    val stopList: List[Any] = TF_IDF.select("token").collect().map(_(0)).toList
 //    stopList.foreach(println)
@@ -79,7 +79,7 @@ object TfIdfCalculator {
     linesRDD.map(x => x.split("\\s+").map(_.trim).toList)
   }
 
-  val sourceFilePath = "/home/akash/Documents/SLIIT/CDAP/Cropus/SplittedDocuments_June/Rugby"        //"in/Test"
+  val sourceFilePath = "/home/akash/Documents/SLIIT/CDAP/Cropus/LocalAll/PreProsessedAll"        //"in/Test"
   val docID = "doc_id"
   val valueDoc = "value"
   val document = "document"

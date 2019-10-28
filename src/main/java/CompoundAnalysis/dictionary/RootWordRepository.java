@@ -8,7 +8,7 @@ public class RootWordRepository {
     private static List<String> rootWords = new ArrayList<String>();
 
     public static List<String> getRootWordRepository() throws IOException {
-        File inputFile = new File("/home/akash/Documents/SLIIT/CDAP/TF-IDF/src/main/java/CompoundAnalysis/InputFiles/sinhala_root_words.txt");
+        File inputFile = new File("/home/ZONE24X7-CMB/akashj/Documents/SLIIT/CDAP/TF-IDF/src/main/java/CompoundAnalysis/InputFiles/sinhala_root_words.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF8"));
 
         String lineText;

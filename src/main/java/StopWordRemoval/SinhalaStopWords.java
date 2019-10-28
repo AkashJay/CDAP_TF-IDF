@@ -9,7 +9,7 @@ import java.util.List;
 public class SinhalaStopWords {
     public static CharArraySet ENGLISH_STOP_WORDS_SE11T;
     ReadStopListFIleToStringArr read = new ReadStopListFIleToStringArr();
-    String[] list = read.getStopList("/home/akash/Documents/SLIIT/CDAP/EvaluationJune26/stopList");
+    String[] list = read.getStopList("/home/ZONE24X7-CMB/akashj/Music/DynamicTest.txt");
 
     public CharArraySet getStopWordCharSet() {
         List<String> stopWords = Arrays.asList(list);

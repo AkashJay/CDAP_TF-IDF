@@ -18,8 +18,11 @@ public class AnalyzeSinhala {
 
     public static void main(String[] args) {
 
+        String input = "/home/ZONE24X7-CMB/akashj/Documents/SLIIT/CDAP/EvaluationDataSets/DS1/NotProcessed/football/";
+        String output = "/home/ZONE24X7-CMB/akashj/Documents/SLIIT/CDAP/90_Evaluation/SVM/DS1/Football/";
+
         //Directory path to files to be analyzed
-        File dir = new File("/home/akash/Documents/SLIIT/CDAP/EvaluationJune26/Documents/AnlyzeSinhala/TestPreprocess/");
+        File dir = new File(input);
 
         //GetSinhala Stopword list
         SinhalaStopWords stopListObj = new SinhalaStopWords();
@@ -40,19 +43,19 @@ public class AnalyzeSinhala {
             //Loop through alll the files in directory
             for (File file : dir.listFiles()) {
                 x++;
-                //Read text file to a string
+                //Read text file to a stringls /u
                 String fileAsString = TextToString.readTextFile(file);
 
                 //Tokenization Processs
 //                String tokenizeText = sinhalaTokenizer.tokenize(fileAsString);
 
-                System.out.println(fileAsString);
+//                System.out.println(fileAsString);
 
                 //compound analysis
-                String compound = compoundAnalysisMain.compoundAnalysis(fileAsString);
+//                String compound = compoundAnalysisMain.compoundAnalysis(fileAsString);
 
                 //StopWordRemover Processs
-//                String stopwordRemover = stopwordRemover1.analyzeDocument(compound);
+                String stopwordRemover = stopwordRemover1.analyzeDocument(fileAsString);
 
                 //Stemming Processs
 //                String stemm = sinhalaStemmer.stemmDOcuments(stopwordRemover);
@@ -60,12 +63,12 @@ public class AnalyzeSinhala {
                 //Lemmatization Processs
 
 
-                System.out.println(compound);
+//                System.out.println(stopwordRemover);
                 //write preproceced data to newfile
-                FileWriter fw=new FileWriter("/home/akash/Documents/SLIIT/CDAP/EvaluationJune26/Documents/AnlyzeSinhala/TestPreprocess/"+ x +".txt");
-                fw.write(compound);
+                FileWriter fw=new FileWriter(output+ x +".txt");
+                fw.write(stopwordRemover);
                 fw.close();
-                System.out.println("Document analysis successful");
+//                System.out.println("Document analysis successful");
             }
         }
         catch (FileNotFoundException e1) {

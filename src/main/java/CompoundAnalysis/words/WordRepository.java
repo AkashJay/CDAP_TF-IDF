@@ -9,7 +9,7 @@ public class WordRepository {
 
 
     public static List<String> getWordRepository() throws IOException {
-        File inputFile = new File("/home/akash/Documents/SLIIT/CDAP/TF-IDF/src/main/java/CompoundAnalysis/InputFiles/sinhala_words.txt");
+        File inputFile = new File("/home/ZONE24X7-CMB/akashj/Documents/SLIIT/CDAP/TF-IDF/src/main/java/CompoundAnalysis/InputFiles/sinhala_words.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF8"));
 
         String lineText;
